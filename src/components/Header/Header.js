@@ -13,7 +13,7 @@ const Header = () => {
     <Nav className="ms-auto">
       <Nav.Link as={Link} to="/"><span className='yellow-text'>Home</span></Nav.Link>
       <Nav.Link as={Link} to="/registerstudent"><span className='yellow-text'>Register as a Student</span></Nav.Link>
-      <Nav.Link as={Link} to="/registerteacher"><span className='yellow-text'>Register as a Student</span></Nav.Link>
+      <Nav.Link as={Link} to="/registerteacher"><span className='yellow-text'>Register as a Teacher</span></Nav.Link>
 
       {/* {
         user.email && <NavDropdown title="Dashboard" id="nav-dropdown">
