@@ -1,8 +1,11 @@
+import { Button } from 'bootstrap';
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import useFirebase from '../../hooks/useFirebase';
 
 const Header = () => {
+  const {user,logOut} = useFirebase();
     return (
         <div>
             <Navbar expand="md" collapseOnSelect style={{backgroundColor: "black"}} variant="dark">
@@ -35,14 +38,10 @@ const Header = () => {
       </NavDropdown>
       } */}
 
-      {/* {
+      {
         user.email &&
-        <NavDropdown id="nav-dropdown" title={
-        <img  style={{width:'32px', height:'32px',display: 'inline-block', borderRadius:'50%',marginTop: '5px'}} src={userProfilePhoto} alt="User Pic" />
-        }>
-        <Nav.Link as={Link} onClick={logOut}>Logout</Nav.Link>
-        </NavDropdown>
-      } */}
+        <button onClick={logOut}>Logout</button>
+      }
       
     </Nav>
     </Navbar.Collapse>

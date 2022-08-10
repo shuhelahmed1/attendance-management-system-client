@@ -1,5 +1,5 @@
-import {  createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import  { useState } from 'react';
+import {  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import  { useEffect, useState } from 'react';
 import initializeAuthentication from '../components/Firebase/firebase.init';
 
 initializeAuthentication();
@@ -58,6 +58,26 @@ const useFirebase = () => {
         })
     }
 
+    const logOut = ( ) =>{
+        signOut(auth)
+        .then(() => {
+            setUser({})
+          }).catch((error) => {
+
+          })
+    }
+    useEffect(()=>{
+        const unsubscribed = onAuthStateChanged(auth,user=>{
+            if(user){
+                setUser(user)
+            }
+            else{
+                setUser({})
+            }
+        });
+        return ()=> unsubscribed;
+    },[auth])
+
     return {
         handleEmail,
         handlePass,
@@ -66,7 +86,8 @@ const useFirebase = () => {
         error,
         user,
         isLogin,
-        toggleLogin
+        toggleLogin,
+        logOut
     };
 };
 
