@@ -1,4 +1,3 @@
-import { Button } from 'bootstrap';
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -17,7 +16,8 @@ const Header = () => {
       <Nav.Link as={Link} to="/"><span className='yellow-text'>Home</span></Nav.Link>
       <Nav.Link as={Link} to="/registerstudent"><span className='yellow-text'>Register as a Student</span></Nav.Link>
       <Nav.Link as={Link} to="/registerteacher"><span className='yellow-text'>Register as a Teacher</span></Nav.Link>
-
+     <Nav.Link as={Link} to="/studentslist"><span className='yellow-text'>Students List</span></Nav.Link>
+ 
       {/* {
         user.email && <NavDropdown title="Dashboard" id="nav-dropdown">
         <Nav.Link as={Link} to='/payment'>Pay</Nav.Link>

@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
+    const [profession, setProfession] = useState('');
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
@@ -21,6 +22,9 @@ const useFirebase = () => {
     }
     const handleEmail = e =>{
         setEmail(e.target.value)
+    }
+    const handleProfession = e =>{
+        setProfession(e.target.value)
     }
     const handlePass = e =>{
         setPassword(e.target.value)
@@ -39,11 +43,13 @@ const useFirebase = () => {
     const registerNewUser = (email, password) =>{
         createUserWithEmailAndPassword(auth, email,password)
         .then((result)=>{
-            const newUser = {email, displayName: name}
+            const newUser = {email, displayName: name, profession: profession}
             setUser(newUser)
-            // // save user to the database
-            // saveUser(email,name,'POST');
+            // save user to the database
+            saveUser(email,name,profession,'POST');
+            setError('')
         })
+        
         .catch(error=>{
             setError(error.message)
         })
@@ -52,6 +58,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email,password)
         .then((result)=>{
             setUser(result.user);
+            setError('')
         })
         .catch(error=>{
             setError(error.message)
@@ -78,10 +85,27 @@ const useFirebase = () => {
         return ()=> unsubscribed;
     },[auth])
 
+    const saveUser = (email, displayName,profession, method) =>{
+        const user = {email, displayName, profession}
+        console.log(user)
+        fetch('http://localhost:5000/users',{
+            method: method,
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            
+        })
+    }
+
     return {
         handleEmail,
         handlePass,
         handleName,
+        handleProfession,
         handleRegister,
         error,
         user,
