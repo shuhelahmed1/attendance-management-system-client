@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useFirebase from '../../hooks/useFirebase';
 
 const Header = () => {
-  const {user,logOut} = useFirebase();
+  const {user,logOut,teacher} = useFirebase();
     return (
         <div>
             <Navbar expand="md" collapseOnSelect style={{backgroundColor: "black"}} variant="dark">
@@ -16,8 +16,11 @@ const Header = () => {
       <Nav.Link as={Link} to="/"><span className='yellow-text'>Home</span></Nav.Link>
       <Nav.Link as={Link} to="/registerstudent"><span className='yellow-text'>Register as a Student</span></Nav.Link>
       <Nav.Link as={Link} to="/registerteacher"><span className='yellow-text'>Register as a Teacher</span></Nav.Link>
-     <Nav.Link as={Link} to="/studentslist"><span className='yellow-text'>Students List</span></Nav.Link>
- 
+      {
+        teacher && <Nav.Link as={Link} to="/studentslist"><span className='yellow-text'>Students List</span></Nav.Link>
+      }
+      
+
       {/* {
         user.email && <NavDropdown title="Dashboard" id="nav-dropdown">
         <Nav.Link as={Link} to='/payment'>Pay</Nav.Link>

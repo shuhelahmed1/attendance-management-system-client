@@ -1,13 +1,19 @@
 import React from 'react';
+import './LoadStudentsList.css';
 
-const LoadStudentsList = ({user}) => {
+const LoadStudentsList = ({student}) => {
     return (
-        <div>
-            <p>{user.displayName}</p>
-            {
-                user.profession === 'student' && <p>{user.profession}</p>
-            }
-        </div>
+        <>
+            { 
+                <div className='single-student'>
+                    <p>Name: {student.displayName}</p>
+                    <p>Age: {student.age}</p>
+                    <p>Religion: {student.religion}</p>
+                    <p>Address: {student.address}</p>
+                    
+                </div>
+            }  
+        </>
     );
 };
 

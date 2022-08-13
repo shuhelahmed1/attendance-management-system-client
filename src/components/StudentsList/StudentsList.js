@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import LoadStudentsList from '../LoadStudentsList/LoadStudentsList';
+import './StudentsList.css';
 
 const StudentsList = () => {
-    const [users, setUsers] = useState([]);
+    const [students, setStudents] = useState([]);
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/users`)
+        fetch(`http://localhost:5000/students`)
         .then(res=>res.json())
         .then(data=>{
-            setUsers(data)
+            setStudents(data)
         })
     },[])
     return (
         <>
-        <div className=''>
+        <div className='d-grid students-section'>
             {
-                users.map(user => <LoadStudentsList key={user._id} user={user}></LoadStudentsList>)
+                students.map(student=> <LoadStudentsList key={student._id} student={student}></LoadStudentsList>)
             }
         </div>
         </>
