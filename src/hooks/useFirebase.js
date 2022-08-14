@@ -1,5 +1,5 @@
 import {  createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import  { useEffect, useState } from 'react';
+import  { useEffect, useRef, useState } from 'react';
 import initializeAuthentication from '../components/Firebase/firebase.init';
 
 initializeAuthentication();
@@ -11,11 +11,11 @@ const useFirebase = () => {
     const [age, setAge] = useState('');
     const [religion, setReligion] = useState('');
     const [address, setAddress] = useState('');
-    const [profession, setProfession] = useState('');
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
     const [teacher, setTeacher] = useState(false);
+    const professionRef = useRef();
 
     const toggleLogin = e =>{
         setIsLogin(e.target.checked)
@@ -27,18 +27,12 @@ const useFirebase = () => {
     const handleEmail = e =>{
         setEmail(e.target.value)
     }
-    const handleAge = e =>{
-        setAge(e.target.value)
-    }
-    const handleReligion = e =>{
-        setReligion(e.target.value)
-    }
     const handleAddress = e =>{
         setAddress(e.target.value)
     }
-    const handleProfession = e =>{
-        setProfession(e.target.value)
-    }
+
+    const profession = professionRef?.current?.value;
+    
     const handlePass = e =>{
         setPassword(e.target.value)
     }
@@ -56,11 +50,11 @@ const useFirebase = () => {
     const registerNewUser = (email, password) =>{
         createUserWithEmailAndPassword(auth, email,password)
         .then((result)=>{
-            const newUser = {email, displayName: name, profession: profession, age: age, religion: religion, address: address}
+            const newUser = {email, displayName: name, profession: profession, address: address}
             setUser(newUser)
             if(profession==='student'){
             // save student to the database
-            saveStudent(email,name,profession,age,religion,address,'POST');
+            saveStudent(email,name,profession,address,'POST');
             }
             else if(profession==='teacher'){
             // save student to the database
@@ -89,7 +83,6 @@ const useFirebase = () => {
         .then(() => {
             setUser({})
           }).catch((error) => {
-
           })
     }
     useEffect(()=>{
@@ -104,8 +97,8 @@ const useFirebase = () => {
         return ()=> unsubscribed;
     },[auth])
 
-    const saveStudent = (email, displayName,profession,age,religion,address, method) =>{
-        const user = {email, displayName,profession,age,  religion, address}
+    const saveStudent = (email, displayName,profession,address, method) =>{
+        const user = {email, displayName,profession, address}
         console.log(user)
         fetch('http://localhost:5000/students',{
             method: method,
@@ -146,9 +139,7 @@ const useFirebase = () => {
         handleEmail,
         handlePass,
         handleName,
-        handleProfession,
-        handleAge,
-        handleReligion,
+        professionRef,
         handleAddress,
         handleRegister,
         error,
