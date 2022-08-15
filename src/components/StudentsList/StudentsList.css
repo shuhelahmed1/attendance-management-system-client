@@ -5,3 +5,20 @@
     grid-gap: 10px;
     text-align: left;
 }
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+    .students-section{
+        width: 95%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .students-section{
+        width: 95%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

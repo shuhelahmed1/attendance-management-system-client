@@ -8,7 +8,7 @@ const StudentsList = () => {
     const dateString = date.toDateString();
     
     useEffect(()=>{
-        fetch(`http://localhost:5000/students`)
+        fetch(`https://secure-harbor-22669.herokuapp.com/students`)
         .then(res=>res.json())
         .then(data=>{
             setStudents(data)

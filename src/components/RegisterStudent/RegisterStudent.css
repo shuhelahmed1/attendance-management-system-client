@@ -1,8 +1,41 @@
 .register-form-container{
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
 }
+.text-container{
+    width: 50%;
+    margin: 10px auto;
+}
 .text-input{
-    display: block;
-    width: 70%;
+    width: 100%;
+}
+.common-button{
+    background-color: white;
+    font-weight: bold;
+    border: 2px solid #209cee;
+    border-radius: 5px;
+}
+.common-button:hover{
+    background-color: #209cee;
+    color: white;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+    .register-form-container{
+        width: 75%;
+    }
+    .text-container{
+        width: 100%;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .register-form-container{
+        width: 95%;
+    }
+    .text-container{
+        width: 100%;
+    }
 }

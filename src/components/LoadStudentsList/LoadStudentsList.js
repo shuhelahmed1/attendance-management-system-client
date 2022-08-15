@@ -5,7 +5,7 @@ const LoadStudentsList = ({student}) => {
     const {displayName,_id,address,attendance} = student;
 
     const handleAttendance = ()=>{
-        fetch(`http://localhost:5000/students/${_id}`,{
+        fetch(`https://secure-harbor-22669.herokuapp.com/students/${_id}`,{
             method:'PUT',
             headers:{
                 'content-type': 'application/json'

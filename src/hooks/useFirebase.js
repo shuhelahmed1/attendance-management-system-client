@@ -13,6 +13,7 @@ const useFirebase = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
     const [teacher, setTeacher] = useState(false);
+    const [message, setMessage] = useState('')
     const professionRef = useRef();
     const attendanceRef = useRef();
 
@@ -47,17 +48,19 @@ const useFirebase = () => {
         e.target.reset();
         
     }
+
     const registerNewUser = (email, password) =>{
         createUserWithEmailAndPassword(auth, email,password)
         .then((result)=>{
             const newUser = {email, displayName: name, profession: profession, address: address, attendance: attendance}
             setUser(newUser)
+            setMessage('Registration successful')
             if(profession==='student'){
             // save student to the database
             saveStudent(email,name,profession,address,attendance, 'POST');
             }
             else if(profession==='teacher'){
-            // save student to the database
+            // save teacher to the database
             saveTeacher(email,name,profession,'POST');
             }
             setError('')
@@ -71,6 +74,7 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email,password)
         .then((result)=>{
             setUser(result.user);
+            setMessage('Login successful')
             setError('')
         })
         .catch(error=>{
@@ -99,7 +103,7 @@ const useFirebase = () => {
 
     const saveStudent = (email, displayName,profession,address, attendance, method) =>{
         const user = {email, displayName,profession, address, attendance}
-        fetch('http://localhost:5000/students',{
+        fetch('https://secure-harbor-22669.herokuapp.com/students',{
             method: method,
             headers:{
                 'content-type':'application/json'
@@ -115,7 +119,7 @@ const useFirebase = () => {
     const saveTeacher = (email, displayName,profession, method) =>{
         const user = {email, displayName,profession}
         console.log(user)
-        fetch('http://localhost:5000/teachers',{
+        fetch('https://secure-harbor-22669.herokuapp.com/teachers',{
             method: method,
             headers:{
                 'content-type':'application/json'
@@ -129,16 +133,10 @@ const useFirebase = () => {
     }
 
     useEffect(()=>{
-        fetch(`http://localhost:5000/teachers/${user.email}`)
+        fetch(`https://secure-harbor-22669.herokuapp.com/teachers/${user.email}`)
         .then(res=>res.json())
         .then(data=> setTeacher(data.teacher))
     },[user.email])
-
-    // const handleAttendance = ()=>{
-    //     console.log('handle attendance clicked')
-    // }
-
-    
 
     return {
         handleEmail,
@@ -153,7 +151,8 @@ const useFirebase = () => {
         isLogin,
         toggleLogin,
         logOut,
-        teacher
+        teacher, 
+        message
     };
 };
 
