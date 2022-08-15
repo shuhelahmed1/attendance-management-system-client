@@ -16,7 +16,7 @@ const StudentsList = () => {
     },[])
     return (
         <>
-        <div className='my-4'>
+        <div className='text-center my-4'>
         <h2>Attendance List</h2>
         <h4>Date: {dateString}</h4>
         <div className='d-grid students-section'>

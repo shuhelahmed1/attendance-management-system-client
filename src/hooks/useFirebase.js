@@ -8,14 +8,13 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [religion, setReligion] = useState('');
     const [address, setAddress] = useState('');
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
     const [teacher, setTeacher] = useState(false);
     const professionRef = useRef();
+    const attendanceRef = useRef();
 
     const toggleLogin = e =>{
         setIsLogin(e.target.checked)
@@ -32,6 +31,7 @@ const useFirebase = () => {
     }
 
     const profession = professionRef?.current?.value;
+    const attendance = attendanceRef?.current?.value;
     
     const handlePass = e =>{
         setPassword(e.target.value)
@@ -50,11 +50,11 @@ const useFirebase = () => {
     const registerNewUser = (email, password) =>{
         createUserWithEmailAndPassword(auth, email,password)
         .then((result)=>{
-            const newUser = {email, displayName: name, profession: profession, address: address}
+            const newUser = {email, displayName: name, profession: profession, address: address, attendance: attendance}
             setUser(newUser)
             if(profession==='student'){
             // save student to the database
-            saveStudent(email,name,profession,address,'POST');
+            saveStudent(email,name,profession,address,attendance, 'POST');
             }
             else if(profession==='teacher'){
             // save student to the database
@@ -97,9 +97,8 @@ const useFirebase = () => {
         return ()=> unsubscribed;
     },[auth])
 
-    const saveStudent = (email, displayName,profession,address, method) =>{
-        const user = {email, displayName,profession, address}
-        console.log(user)
+    const saveStudent = (email, displayName,profession,address, attendance, method) =>{
+        const user = {email, displayName,profession, address, attendance}
         fetch('http://localhost:5000/students',{
             method: method,
             headers:{
@@ -135,11 +134,18 @@ const useFirebase = () => {
         .then(data=> setTeacher(data.teacher))
     },[user.email])
 
+    // const handleAttendance = ()=>{
+    //     console.log('handle attendance clicked')
+    // }
+
+    
+
     return {
         handleEmail,
         handlePass,
         handleName,
         professionRef,
+        attendanceRef,
         handleAddress,
         handleRegister,
         error,
