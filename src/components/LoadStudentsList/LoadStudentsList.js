@@ -19,23 +19,26 @@ const LoadStudentsList = ({student}) => {
         }
         )
     }
-    return (
-        <>
-            { 
-                <div className='single-student'>
-                    <p>Name: {displayName}</p>
-                    <p>Student ID: {_id}</p>
-                    <p>Address: {address}</p>
-                    <p>Attendance: {attendance}</p>
-                    {
-                        attendance === 'present' ? <button className='common-button' onClick={handleAttendance}>Absent</button> : <button className='common-button' onClick={handleAttendance}>Present</button>
-                    }
-                    
 
-                </div>
-            }  
-        </>
-    );
+    
+        return (
+            <>
+                { 
+                    <div className='single-student'>
+                        <p>Name: {displayName}</p>
+                        <p>Student ID: {_id}</p>
+                        <p>Address: {address}</p>
+                        <p>Attendance: {attendance}</p>
+                        {
+                            attendance === 'present' ? <button className='common-button' onClick={handleAttendance}>Absent</button> : <button className='common-button' onClick={handleAttendance}>Present</button>
+                        }
+                        
+    
+                    </div>
+                }  
+            </>
+        )
+    ;
 };
 
 export default LoadStudentsList;

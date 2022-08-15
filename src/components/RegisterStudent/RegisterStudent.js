@@ -8,7 +8,7 @@ const RegisterStudent = () => {
         <>
             <div className='register-form-container row row-cols-lg-10 row-cols-md-10 row-cols-10 mx-auto my-4'>
         <h2 style={{fontWeight: 'bold'}}>{isLogin ? 'Login' : 'Register'} as a Student: </h2>
-            <form className='colm my-3' onSubmit={handleRegister}>
+            <form className='col my-3' onSubmit={handleRegister}>
                 <p className='text-container'>Name:<input className='text-input' required  onBlur={handleName} type="text" placeholder=''/></p>
                 <p className='text-container'>Email: <input className='text-input' required  onBlur={handleEmail} type="email" placeholder=''/></p>
                 <p className='text-container'>Address: <input className='text-input' required  onBlur={handleAddress} type="text" placeholder=''/></p>

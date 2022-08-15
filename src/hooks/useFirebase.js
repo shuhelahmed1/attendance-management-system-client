@@ -118,7 +118,6 @@ const useFirebase = () => {
 
     const saveTeacher = (email, displayName,profession, method) =>{
         const user = {email, displayName,profession}
-        console.log(user)
         fetch('https://secure-harbor-22669.herokuapp.com/teachers',{
             method: method,
             headers:{

@@ -13,11 +13,11 @@ const Header = () => {
     <Navbar.Toggle/>
     <Navbar.Collapse>
     <Nav className="ms-auto">
-      <Nav.Link as={Link} to="/"><span className='yellow-text'>Home</span></Nav.Link>
-      <Nav.Link as={Link} to="/registerstudent"><span className='yellow-text'>Register as a Student</span></Nav.Link>
-      <Nav.Link as={Link} to="/registerteacher"><span className='yellow-text'>Register as a Teacher</span></Nav.Link>
+      <Nav.Link as={Link} to="/">Home</Nav.Link>
+      <Nav.Link as={Link} to="/registerstudent">Register as a Student</Nav.Link>
+      <Nav.Link as={Link} to="/registerteacher">Register as a Teacher</Nav.Link>
       {
-        teacher && <Nav.Link as={Link} to="/studentslist"><span className='yellow-text'>Students List</span></Nav.Link>
+        teacher && <Nav.Link as={Link} to="/studentslist"><span>Students List</span></Nav.Link>
       }
 
       {
